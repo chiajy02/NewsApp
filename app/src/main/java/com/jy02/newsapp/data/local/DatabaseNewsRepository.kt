@@ -7,6 +7,7 @@ import org.mongodb.kbson.ObjectId
 
 interface DatabaseNewsRepository {
     fun getData(): Flow<List<RealmArticle>>
+    fun getData(id: ObjectId): RealmArticle?
     fun filterData (author: String): Flow<List<RealmArticle>>
     suspend fun insertArticles(article: List<Article>)
     suspend fun updateArticle(article: RealmArticle)

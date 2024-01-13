@@ -1,12 +1,12 @@
-package com.jy02.newsapp.main
+package com.jy02.newsapp.main.newsList
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.jy02.newsapp.R
 import com.jy02.newsapp.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.viewModels
+
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 

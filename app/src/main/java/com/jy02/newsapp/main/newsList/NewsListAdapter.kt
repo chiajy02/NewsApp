@@ -1,14 +1,13 @@
-package com.jy02.newsapp.main
+package com.jy02.newsapp.main.newsList
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.jy02.newsapp.R
 import com.jy02.newsapp.data.models.RealmArticle
 import com.jy02.newsapp.databinding.RvItemNewsBinding
+import com.jy02.newsapp.main.AppCoordinator
 import com.jy02.newsapp.util.extension.loadImage
 
 class NewsListAdapter: RecyclerView.Adapter<NewsListAdapter.NewsViewHolder>() {
@@ -19,8 +18,14 @@ class NewsListAdapter: RecyclerView.Adapter<NewsListAdapter.NewsViewHolder>() {
         private val binding = RvItemNewsBinding.bind(itemView)
         private val viewModel = (itemView.context as MainActivity).viewModel
         init {
-            itemView.setOnClickListener {
+            // long click to delete item
+            itemView.setOnLongClickListener {
                 viewModel.deleteNewsLocal(newsList.get(position).id)
+                true
+            }
+            // click to navigate to news article page
+            itemView.setOnClickListener {
+                AppCoordinator().navigateToNewsArticle(itemView.context, newsList.get(position).id)
             }
         }
         fun bind(article: RealmArticle){

@@ -1,4 +1,4 @@
-package com.jy02.newsapp.main
+package com.jy02.newsapp.main.newsList
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

@@ -15,6 +15,10 @@ class DatabaseNewsRepositoryImpl(val realm: Realm): DatabaseNewsRepository {
         return realm.query<RealmArticle>().asFlow().map { it.list }
     }
 
+    override fun getData(id: ObjectId): RealmArticle? {
+        return realm.query<RealmArticle>(query = "id==$0", id).first().find()
+    }
+
     override fun filterData(author: String): Flow<List<RealmArticle>> {
         return realm.query<RealmArticle>(query = "author CONTAINS[c] $0", author).asFlow().map { it.list }
     }
