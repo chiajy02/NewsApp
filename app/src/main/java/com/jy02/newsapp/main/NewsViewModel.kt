@@ -24,9 +24,12 @@ class NewsViewModel @Inject constructor(
         getNewsLocal()
     }
 
+    //response of get news api
     val newsResponse = MutableLiveData<Response<NewsModel>>()
+    //news from local database
     var newsArticle = MutableLiveData<MutableList<RealmArticle>>()
 
+    //get news from internet if has new news, insert to local database
     fun getNews(){
         viewModelScope.launch {
             val response = newsRepository.fetchNews()
@@ -38,6 +41,7 @@ class NewsViewModel @Inject constructor(
         }
     }
 
+    //get news from local database
     fun getNewsLocal(){
         viewModelScope.launch {
             val response = databaseNewsRepository.getData().collect{
@@ -46,6 +50,7 @@ class NewsViewModel @Inject constructor(
         }
     }
 
+    // will store to realm again if deleted every time reopen app
     fun deleteNewsLocal(id: ObjectId){
         viewModelScope.launch {
             databaseNewsRepository.deleteArticle(id)

@@ -21,7 +21,6 @@ class DatabaseNewsRepositoryImpl(val realm: Realm): DatabaseNewsRepository {
 
     override suspend fun insertArticles(article: List<Article>) {
         article.forEach {
-            Log.d("insertArticles", "${it}")
             val realmArticle = RealmArticle().apply {
                 author = it.author
                 content = it.content
@@ -35,7 +34,7 @@ class DatabaseNewsRepositoryImpl(val realm: Realm): DatabaseNewsRepository {
                 url = it.url
                 urlToImage = it.urlToImage
             }
-
+            // will not insert into local database if content has exist
             realm.write {
                 val existingArticle = query<RealmArticle>(query = "content==$0", it.content).first().find()
                 if(existingArticle==null) copyToRealm(realmArticle)
